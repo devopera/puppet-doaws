@@ -4,8 +4,11 @@ define doaws::creduser (
   # ---------------
   # setup defaults
 
-  $user = 'web',
+  $user = $title,
   $notifier_dir = '/etc/puppet/tmp',
+  $account_id = 'n/a',
+  $console_username = 'n/a',
+  $console_password = 'n/a',
   $secret_access_key,
   $access_key_id,
   $region,
