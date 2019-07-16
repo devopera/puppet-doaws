@@ -1,6 +1,6 @@
 {
   "name": "puppet-doaws",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "(c) Devopera",
   "summary": "Install AWS credentials and CLI.",
   "license": "Apache-2.0",

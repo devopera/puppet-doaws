@@ -4,7 +4,9 @@ class doaws (
   # ---------------
   # setup defaults
 
-  $user = 'web',
+  $user = undef,
+  $users = undef,
+  $user_defaults = undef,
   $notifier_dir = '/etc/puppet/tmp',
   $secret_access_key,
   $access_key_id,
@@ -16,25 +18,18 @@ class doaws (
 
 ) {
 
-  case $operatingsystem {
-    centos, redhat, fedora,
-    ubuntu, debian: {
-      $filepath = "/home/${user}/.aws/"
-    }
-    windows: {
-      $filepath = "C:\\Users\\${user}\\.aws\\"
+  if ($user != undef) {
+    doaws::creduser { 'doaws-creduser-default-user' :
+      user => $user,
+      secret_access_key => $secret_access_key,
+      access_key_id => $access_key_id,
+      region => $region,
     }
   }
 
-  file { 'doaws-dir' :
-    path   => "${filepath}",
-    ensure => 'directory'
-  }
-
-  file { 'doaws-creds' :
-    path    => "${filepath}credentials",
-    ensure  => 'file',
-    content => template('doaws/credentials.erb'),
+  # create multiple users if details passed in hash
+  if ($users != undef) {
+    create_resources(doaws::creduser, $users, $user_defaults)
   }
 
 }
