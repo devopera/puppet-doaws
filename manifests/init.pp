@@ -8,9 +8,9 @@ class doaws (
   $users = undef,
   $user_defaults = undef,
   $notifier_dir = '/etc/puppet/tmp',
-  $secret_access_key,
-  $access_key_id,
-  $region,
+  $secret_access_key = undef,
+  $access_key_id = undef,
+  $region = undef,
 
   # end of class arguments
   # ----------------------
