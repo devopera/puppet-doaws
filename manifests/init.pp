@@ -5,8 +5,8 @@ class doaws (
   # setup defaults
 
   $user = undef,
-  $users = undef,
-  $user_defaults = undef,
+  $users = hiera('doaws::users', {}),
+  $user_defaults = hiera('dows::user_defaults', {}),
   $notifier_dir = '/etc/puppet/tmp',
   $secret_access_key = undef,
   $access_key_id = undef,
@@ -28,7 +28,7 @@ class doaws (
   }
 
   # create multiple users if details passed in hash
-  if ($users != undef) {
+  if ($users != {}) {
     create_resources(doaws::creduser, $users, $user_defaults)
   }
 
